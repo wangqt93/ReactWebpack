@@ -1,0 +1,12 @@
+// eslint 规则配置文件
+{
+    "env": {
+        "browser": true
+    },
+    "extends": [
+        "airbnb"
+    ],
+    "rules": {
+        "indent": 2
+    }
+}
