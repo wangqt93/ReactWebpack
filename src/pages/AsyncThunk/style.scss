@@ -1,0 +1,22 @@
+.two-async-container {
+  text-align: center;
+  margin-top: 20px;
+  .async-number {
+    width: 400px;
+    height:400px;
+    border:1px solid #eee;
+    .number {
+      padding:100px 0;
+      text-align: center;
+    }
+    .btn-container {
+      display: flex;
+      width:50%;
+      margin: auto;
+      justify-content: space-between;
+      button {
+        padding: 5px 20px;
+      }
+    }
+  }
+}

@@ -2,10 +2,13 @@
 
 const  numReducer = (number = 0,action) =>{
     if(action.type === 'add') {
-        return  number + action.value
+        return  number + (action.value || 1)
     }else if(action.type === 'minus') {
         return number - action.value
-    }else {
+    }else if(action.type === 'saga') {
+        return number + action.value
+    }
+    else {
         return number
     }
 }

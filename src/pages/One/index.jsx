@@ -1,44 +1,52 @@
 import React, { Component } from 'react'
-import { connect } from 'react-redux'
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux'
+ // import* as types from "../../store/actions";
+import { add,minus } from "../../store/actions";
 
 import './style.scss'
-
-
 
  class One extends Component {
     constructor(props) {
         super(props);
     }
-    add = () => {
-        this.props.getNumber({type: 'add',value:1})
-    }
-    minus = () => {
-        this.props.getNumber({type:'minus',value:3})
-    }
     render() {
-
-    return (
-      <div className='one-container'>
-        <p>获取结果</p>
-        <h2 className='number'>{this.props.number}</h2>
-        <div className='btn-container'>
-          <button onClick={this.add}>+1</button>
-          <button onClick={this.minus}>-1</button>
-        </div>
-      </div>
-    )
+        const {add,minus} = this.props
+        return (
+          <div className='one-container'>
+            <p>获取结果</p>
+            <h2 className='number'>{this.props.number}</h2>
+            <div className='btn-container'>
+              <button onClick={() => add(3)}>+3</button>
+              <button onClick={() => minus(3)}>-3</button>
+            </div>
+          </div>
+        )
     }
 }
 
 const mapStateToProps = (state) => {
     return {
-        number: state
+        number: state.numReducer
     }
 }
-const mapDispatchToProps = (dispatch) => {
-    return {
-        getNumber: action => dispatch(action)
-    }
-}
+// 写法一
+// const mapDispatchToProps = (dispatch) => {
+//     return {
+//         add: value => dispatch(add(3)),
+//         minus: value => dispatch(minus(3))
+//     }
+// }
 
-export default connect(mapStateToProps,mapDispatchToProps)(One)
+// 写法二: bindActionCreators运用
+// const mapDispatchToProps = dispatch => bindActionCreators({add,minus},dispatch)
+// or
+// const mapDispatchToProps = dispatch => bindActionCreators(types,dispatch)
+
+
+
+// 写法三
+export default connect(mapStateToProps,{add:() => ({type: 'add',value:3}),minus})(One)
+
+
+// export default connect(mapStateToProps,mapDispatchToProps)(One)
